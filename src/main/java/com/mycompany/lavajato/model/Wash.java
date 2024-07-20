@@ -4,8 +4,6 @@ import java.util.UUID;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -18,30 +16,27 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "cars")
+@Table(name = "washes")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Car {
+public class Wash {
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    @Column(name = "license_plate", nullable = false, unique = true)
-    private String licensePlate;
-
-    @Column(nullable = false)
-    private String model;
-
-    @Column(nullable = false)
-    private String color;
-
-    @Enumerated(EnumType.STRING)
-    private CarStatus status;
-
     @ManyToOne
-    @JoinColumn(name = "owner_id", nullable = false)
-    private Owner owner;
+    @JoinColumn(name = "car_id", nullable = false)
+    private Car car;
+
+    @Column(nullable = false)
+    private String description;
+
+    @Column(nullable = false)
+    private Double amount;
+
+    @Column(nullable = false)
+    private boolean isPaid;
 }

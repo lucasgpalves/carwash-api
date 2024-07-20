@@ -1,8 +1,8 @@
 package com.mycompany.lavajato.model;
 
 public enum CarStatus {
-    ESPERAR,
+    A_FAZER,
     LAVANDO,
     SECANDO,
-    FINALIZADO
+    PRONTO
 }
