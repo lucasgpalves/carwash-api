@@ -2,6 +2,7 @@ package com.mycompany.lavajato.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,6 +18,7 @@ public class OwnerController {
     @Autowired
     private OwnerService ownerService;
 
+    @PostMapping
     public ResponseEntity<Owner> createOwner(@RequestBody OwnerRequest ownerRequest){
         Owner owner = ownerService.createOwner(ownerRequest);
         return ResponseEntity.ok(owner);
