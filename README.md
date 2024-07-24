@@ -94,10 +94,10 @@ A aplicação estará disponível em `http://localhost:8080`.
 ```http
 POST /api/cars
 ```
-```
+```JSON
 {
-	"name": "Jonh Doe",
-	"phoneNumber" : "123456789"
+  "name": "Jonh Doe",
+  "phoneNumber" : "123456789"
 }
 ```
 
@@ -114,11 +114,11 @@ POST /api/cars
 Body para adicionar um novo Carro
 ```JSON 
 {
-    "licensePlate": "AAA1A11",
-    "model": "Toyota Corolla",
-    "color": "Preto",
-    "status": "A_FAZER",
-		"ownerId": null
+  "licensePlate": "AAA1A11",
+  "model": "Toyota Corolla",
+  "color": "Preto",
+  "status": "A_FAZER",
+	"ownerId": null
 }
 ```
 
@@ -135,10 +135,10 @@ POST /api/cars
 Body para adicionar uma Nova Lavangem
 ```JSON 
 {
-    "carId": "Insira o Id do carro criado aqui",
-    "description": "Americana + Cera",
-    "amount": 70.00,
-    "isPaid": false
+  "carId": "Insira o Id do carro criado aqui",
+  "description": "Americana + Cera",
+  "amount": 70.00,
+  "isPaid": false
 }
 ```
 
