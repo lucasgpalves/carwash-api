@@ -1,14 +1,17 @@
 package com.mycompany.lavajato.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.mycompany.lavajato.model.Car;
 import com.mycompany.lavajato.request.CarRequest;
+import com.mycompany.lavajato.response.CarResponse;
 import com.mycompany.lavajato.service.CarService;
 
 @RestController
@@ -19,9 +22,15 @@ public class CarController {
     private CarService carService;
 
     @PostMapping
-    public ResponseEntity<Car> createCar(@RequestBody CarRequest carRequest){
-        Car savedCar = carService.createCar(carRequest);
+    public ResponseEntity<CarResponse> createCar(@RequestBody CarRequest carRequest){
+        CarResponse savedCar = carService.createCar(carRequest);
         return ResponseEntity.ok(savedCar);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<CarResponse>> getAllCars(){
+        List<CarResponse> cars = carService.getAllCars();
+        return ResponseEntity.ok(cars);
     }
 
 }
