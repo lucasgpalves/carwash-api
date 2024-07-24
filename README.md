@@ -22,6 +22,8 @@ src
     │       └── lavajato
     │           ├── controller
     │           │   ├── CarController.java
+    │           │   ├── OwnerController.java    
+    │           │   └── WashController.java
     │           ├── model
     │           │   ├── Car.java
     │           │   ├── CarStatus.java
@@ -31,6 +33,14 @@ src
     │           │   ├── CarRepository.java
     │           │   ├── OwnerRepository.java
     │           │   └── WashRepository.java
+    │           ├── request
+    │           │   ├── CarRequest.java
+    │           │   ├── OwnerRequest.java
+    │           │   └── WashRequest.java
+    │           ├── response
+    │           │   ├── CarResponse.java
+    │           │   ├── OwnerResponse.java
+    │           │   └── WashResponse.java
     │           ├── service
     │           │   ├── CarService.java
     │           │   ├── OwnerService.java
@@ -38,9 +48,8 @@ src
     │           └── LavajatoApplication.java
     └── resources
         ├── db
-            └── migration
-        ├── application.properties
-        └── static
+        │    └── migration
+        └── application.properties
 ```
 
 ## Requisitos
