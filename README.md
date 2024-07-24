@@ -89,24 +89,59 @@ A aplicação estará disponível em `http://localhost:8080`.
 
 ## Endpoints da API
 
-### Carros
-- Listar Carros por Status
+### Dono
+- Adicionar um Novo Dono
 ```http
-GET /api/cars?status={status}
+POST /api/cars
 ```
-- - Parâmetros: status (opcional, valores possíveis: ESPERANDO, LAVANDO, SECANDO, PRONTO)
+```
+{
+	"name": "Jonh Doe",
+	"phoneNumber" : "123456789"
+}
+```
+
+### Carros
+- Listar Carros
+```http
+GET /api/cars
+```
 
 - Adicionar um Novo Carro
 ```http
 POST /api/cars
 ```
-- - Body: { "licensePlate": "ABC1234", "model": "Sedan", "ownerName": "João" }
-
-- Atualizar Status do Carro
-```http
-PATCH /api/cars/{id}/status
+Body para adicionar um novo Carro
+```JSON 
+{
+    "licensePlate": "AAA1A11",
+    "model": "Toyota Corolla",
+    "color": "Preto",
+    "status": "A_FAZER",
+		"ownerId": null
+}
 ```
-- - Body: { "status": "LAVANDO" }
+
+### Lavagens
+- Listar Carros
+```http
+GET /api/cars
+```
+
+- Adicionar uma nova Lavangem
+```http
+POST /api/cars
+```
+Body para adicionar uma Nova Lavangem
+```JSON 
+{
+    "carId": "Insira o Id do carro criado aqui",
+    "description": "Americana + Cera",
+    "amount": 70.00,
+    "isPaid": false
+}
+```
+
 
 ## Contribuição
 1. Faça um fork do projeto
