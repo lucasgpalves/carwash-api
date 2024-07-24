@@ -104,7 +104,7 @@ POST /api/cars
 ### Carros
 - Listar Carros
 ```http
-GET /api/cars
+GET /api/owners
 ```
 
 - Adicionar um Novo Carro
