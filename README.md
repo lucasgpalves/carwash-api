@@ -64,7 +64,7 @@ Certifique-se de ter um banco de dados PostgreSQL em execução e crie um banco 
 Atualize o arquivo `application.properties` com as informações do seu banco de dados:
 
 ```properties
-spring.datasource.url=jdbc:h2:mem:planner
+spring.datasource.url=jdbc:h2:mem:carwash
 spring.datasource.driver-class-name=org.h2.Driver
 spring.datasource.password=
 spring.datasource.username=sa
