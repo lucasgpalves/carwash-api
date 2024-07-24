@@ -92,7 +92,7 @@ A aplicação estará disponível em `http://localhost:8080`.
 ### Dono
 - Adicionar um Novo Dono
 ```http
-POST /api/cars
+POST /api/owners
 ```
 ```JSON
 {
@@ -104,7 +104,7 @@ POST /api/cars
 ### Carros
 - Listar Carros
 ```http
-GET /api/owners
+GET /api/cars
 ```
 
 - Adicionar um Novo Carro
