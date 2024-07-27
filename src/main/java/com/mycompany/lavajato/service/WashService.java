@@ -1,6 +1,8 @@
 package com.mycompany.lavajato.service;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,5 +47,21 @@ public class WashService {
             .collect(Collectors.toList());
     }
 
+    public WashResponse updateTypeWash(UUID id, WashRequest washRequest) {
+        Optional<Wash> washOptional = washRepository.findById(id);
 
+        if(washOptional.isPresent()) {
+            Wash wash = washOptional.get();
+            wash.setDescription(washRequest.description());
+            wash.setAmount(washRequest.amount());
+            wash.setPaid(washRequest.isPaid());
+
+            Wash updatedWash = washRepository.save(wash);
+            UUID carId = wash.getCar() != null ? wash.getCar().getId() : null;
+
+            return new WashResponse(updatedWash.getId(), updatedWash.getDescription(), updatedWash.getAmount(), updatedWash.isPaid(), carId);
+        } else {
+            throw new RuntimeException("Wash not found");
+        }
+    }
 }
