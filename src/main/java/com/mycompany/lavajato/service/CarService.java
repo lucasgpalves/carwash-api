@@ -13,6 +13,7 @@ import com.mycompany.lavajato.model.Owner;
 import com.mycompany.lavajato.repository.CarRepository;
 import com.mycompany.lavajato.repository.OwnerRepository;
 import com.mycompany.lavajato.request.CarRequest;
+import com.mycompany.lavajato.request.UpdateCarStatusRequest;
 import com.mycompany.lavajato.response.CarResponse;
 
 @Service
@@ -54,13 +55,14 @@ public class CarService {
             .collect(Collectors.toList());
     }
 
-    public CarResponse updateCarStatus(UUID id, CarRequest carRequest) {
+    public CarResponse updateCarStatus(UUID id, UpdateCarStatusRequest updateCarStatusRequest) {
         Optional<Car> carOptional = carRepository.findById(id);
 
         if(carOptional.isPresent()) {
             Car car = carOptional.get();
-            car.setStatus(carRequest.status());
-            
+
+            car.setStatus(updateCarStatusRequest.status());
+
             Car updatedCar = carRepository.save(car);
             UUID ownerId = car.getOwner() != null ? car.getOwner().getId() : null;
 
