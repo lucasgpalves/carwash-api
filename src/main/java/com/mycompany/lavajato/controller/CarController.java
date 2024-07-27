@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mycompany.lavajato.model.CarStatus;
 import com.mycompany.lavajato.request.CarRequest;
 import com.mycompany.lavajato.request.UpdateCarStatusRequest;
 import com.mycompany.lavajato.response.CarResponse;
@@ -41,6 +42,12 @@ public class CarController {
     public ResponseEntity<CarResponse> updateCarStatus(@PathVariable UUID id, @RequestBody UpdateCarStatusRequest updateCarStatusRequest) {
         CarResponse updatedCar = carService.updateCarStatus(id, updateCarStatusRequest);
         return ResponseEntity.ok(updatedCar);
+    }
+
+    @GetMapping("/status/{status}")
+    public ResponseEntity<List<CarResponse>> getCarsByStatus(@PathVariable CarStatus status) {
+        List<CarResponse> cars = carService.getCarsByStatus(status);
+        return ResponseEntity.ok(cars);
     }
 
 }

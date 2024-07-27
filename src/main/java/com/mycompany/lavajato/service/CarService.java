@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mycompany.lavajato.model.Car;
+import com.mycompany.lavajato.model.CarStatus;
 import com.mycompany.lavajato.model.Owner;
 import com.mycompany.lavajato.repository.CarRepository;
 import com.mycompany.lavajato.repository.OwnerRepository;
@@ -72,4 +73,14 @@ public class CarService {
         }
     }
 
+    public List<CarResponse> getCarsByStatus(CarStatus status) {
+        return carRepository.findByStatus(status).stream()
+                .map(car -> new CarResponse(car.getId(), 
+                    car.getLicensePlate(), 
+                    car.getModel(), 
+                    car.getColor(), 
+                    car.getStatus(), 
+                    car.getOwner() != null ? car.getOwner().getId() : null))
+                .collect(Collectors.toList());
+    }
 }
