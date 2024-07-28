@@ -56,6 +56,15 @@ public class CarService {
             .collect(Collectors.toList());
     }
 
+    public CarResponse getCarById(UUID id) {
+        Car car = carRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Car not found"));
+
+        UUID ownerId = car.getOwner() != null ? car.getOwner().getId() : null;
+
+        return new CarResponse(car.getId(), car.getLicensePlate(), car.getModel(), car.getColor(), car.getStatus(), ownerId);
+    }
+
     public CarResponse updateCarStatus(UUID id, UpdateCarStatusRequest updateCarStatusRequest) {
         Optional<Car> carOptional = carRepository.findById(id);
 

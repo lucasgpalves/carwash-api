@@ -47,6 +47,15 @@ public class WashService {
             .collect(Collectors.toList());
     }
 
+    public WashResponse getWashById(UUID id) {
+        Wash wash = washRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Wash not found"));
+
+        UUID carId = wash.getCar().getId();
+
+        return new WashResponse(wash.getId(), wash.getDescription(), wash.getAmount(), wash.isPaid(), carId);
+    }
+
     public WashResponse updateTypeWash(UUID id, WashRequest washRequest) {
         Optional<Wash> washOptional = washRepository.findById(id);
 
