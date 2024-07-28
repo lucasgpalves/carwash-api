@@ -38,6 +38,12 @@ public class CarController {
         return ResponseEntity.ok(cars);
     }
 
+    @GetMapping("{id}")
+    public ResponseEntity<CarResponse> getCarById(@PathVariable UUID id){
+        CarResponse car = carService.getCarById(id);
+        return ResponseEntity.ok(car);
+    }
+
     @PutMapping("{id}/status")
     public ResponseEntity<CarResponse> updateCarStatus(@PathVariable UUID id, @RequestBody UpdateCarStatusRequest updateCarStatusRequest) {
         CarResponse updatedCar = carService.updateCarStatus(id, updateCarStatusRequest);

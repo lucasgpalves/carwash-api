@@ -36,6 +36,12 @@ public class WashController {
         return ResponseEntity.ok(washes);
     }
 
+    @GetMapping("{id}")
+    public ResponseEntity<WashResponse> getWashById(@PathVariable UUID id){
+        WashResponse wash = washService.getWashById(id);
+        return ResponseEntity.ok(wash);
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<WashResponse> updateTypeWash(@PathVariable UUID id, @RequestBody WashRequest washRequest) {
         WashResponse wash = washService.updateTypeWash(id, washRequest);
