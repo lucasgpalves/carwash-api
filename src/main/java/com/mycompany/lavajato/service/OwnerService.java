@@ -1,6 +1,8 @@
 package com.mycompany.lavajato.service;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +19,13 @@ public class OwnerService {
     @Autowired
     private OwnerRepository ownerRepository;
 
-    public Owner createOwner(OwnerRequest ownerRequest){
+    public OwnerResponse createOwner(OwnerRequest ownerRequest){
         Owner owner = new Owner();
         owner.setName(ownerRequest.name());
         owner.setPhoneNumber(ownerRequest.phoneNumber());
 
-        return ownerRepository.save(owner);
+        Owner savedOwner = ownerRepository.save(owner);
+        return new OwnerResponse(savedOwner.getId(), savedOwner.getName(), savedOwner.getPhoneNumber());
     }
 
     public List<OwnerResponse> getAllOwners() {
@@ -31,6 +34,17 @@ public class OwnerService {
                 owner.getName(),
                 owner.getPhoneNumber()))
             .collect(Collectors.toList());
+    }
+
+    public OwnerResponse getOwnerById(UUID id) {
+        Optional<Owner> ownerOptional = ownerRepository.findById(id);
+
+        if(ownerOptional.isPresent()) {
+            Owner owner = ownerOptional.get();
+            return new OwnerResponse(owner.getId(), owner.getName(), owner.getPhoneNumber());
+        } else {
+            throw new RuntimeException("Owner not found");
+        }
     }
 
 }
