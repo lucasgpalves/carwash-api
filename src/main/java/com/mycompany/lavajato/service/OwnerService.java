@@ -63,4 +63,12 @@ public class OwnerService {
         }
     }
 
+    public void deleteOwnerById(UUID id) {
+        if(ownerRepository.existsById(id)) {
+            ownerRepository.deleteById(id);
+        } else {
+            throw new RuntimeException("Owner not found");
+        }
+    }
+
 }
