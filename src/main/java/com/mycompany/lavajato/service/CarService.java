@@ -65,6 +65,17 @@ public class CarService {
         return new CarResponse(car.getId(), car.getLicensePlate(), car.getModel(), car.getColor(), car.getStatus(), ownerId);
     }
 
+    public List<CarResponse> getCarsByStatus(CarStatus status) {
+        return carRepository.findByStatus(status).stream()
+                .map(car -> new CarResponse(car.getId(), 
+                    car.getLicensePlate(), 
+                    car.getModel(), 
+                    car.getColor(), 
+                    car.getStatus(), 
+                    car.getOwner() != null ? car.getOwner().getId() : null))
+                .collect(Collectors.toList());
+    }
+
     public CarResponse updateCarStatus(UUID id, UpdateCarStatusRequest updateCarStatusRequest) {
         Optional<Car> carOptional = carRepository.findById(id);
 
@@ -82,14 +93,12 @@ public class CarService {
         }
     }
 
-    public List<CarResponse> getCarsByStatus(CarStatus status) {
-        return carRepository.findByStatus(status).stream()
-                .map(car -> new CarResponse(car.getId(), 
-                    car.getLicensePlate(), 
-                    car.getModel(), 
-                    car.getColor(), 
-                    car.getStatus(), 
-                    car.getOwner() != null ? car.getOwner().getId() : null))
-                .collect(Collectors.toList());
+    public void deleteCarById(UUID id){
+        if(carRepository.existsById(id)) {
+            carRepository.deleteById(id);
+        } else {
+            throw new RuntimeException("Car not found");
+        }
+
     }
 }
