@@ -47,4 +47,20 @@ public class OwnerService {
         }
     }
 
+    public OwnerResponse updateOwnerById(UUID id, OwnerRequest ownerRequest) {
+        Optional<Owner> ownerOptional = ownerRepository.findById(id);
+
+        if(ownerOptional.isPresent()) {
+            Owner owner = ownerOptional.get();
+
+            owner.setName(ownerRequest.name());
+            owner.setPhoneNumber(ownerRequest.phoneNumber());
+
+            Owner updatedOwner = ownerRepository.save(owner);
+            return new OwnerResponse(updatedOwner.getId(), updatedOwner.getName(), updatedOwner.getPhoneNumber());
+        } else {
+            throw new RuntimeException("Owner not found");
+        }
+    }
+
 }

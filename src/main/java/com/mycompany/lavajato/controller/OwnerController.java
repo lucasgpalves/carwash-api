@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -38,6 +39,12 @@ public class OwnerController {
     @GetMapping("/{id}")
     public ResponseEntity<OwnerResponse> getOwnerById(@PathVariable UUID id) {
         OwnerResponse owner = ownerService.getOwnerById(id);
+        return ResponseEntity.ok(owner);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<OwnerResponse> updateOwnerById(@PathVariable UUID id, @RequestBody OwnerRequest ownerRequest) {
+        OwnerResponse owner = ownerService.updateOwnerById(id, ownerRequest);
         return ResponseEntity.ok(owner);
     }
 }
