@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -43,8 +44,14 @@ public class WashController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<WashResponse> updateTypeWash(@PathVariable UUID id, @RequestBody WashRequest washRequest) {
-        WashResponse wash = washService.updateTypeWash(id, washRequest);
+    public ResponseEntity<WashResponse> updateWashById(@PathVariable UUID id, @RequestBody WashRequest washRequest) {
+        WashResponse wash = washService.updateWashById(id, washRequest);
         return ResponseEntity.ok(wash);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteWashById(@PathVariable UUID id) {
+        washService.deleteWashById(id);
+        return ResponseEntity.noContent().build();
     }
 }

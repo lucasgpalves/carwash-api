@@ -56,7 +56,7 @@ public class WashService {
         return new WashResponse(wash.getId(), wash.getDescription(), wash.getAmount(), wash.isPaid(), carId);
     }
 
-    public WashResponse updateTypeWash(UUID id, WashRequest washRequest) {
+    public WashResponse updateWashById(UUID id, WashRequest washRequest) {
         Optional<Wash> washOptional = washRepository.findById(id);
 
         if(washOptional.isPresent()) {
@@ -69,6 +69,14 @@ public class WashService {
             UUID carId = wash.getCar() != null ? wash.getCar().getId() : null;
 
             return new WashResponse(updatedWash.getId(), updatedWash.getDescription(), updatedWash.getAmount(), updatedWash.isPaid(), carId);
+        } else {
+            throw new RuntimeException("Wash not found");
+        }
+    }
+
+    public void deleteWashById(UUID id) {
+        if(washRepository.existsById(id)) {
+            washRepository.deleteById(id);
         } else {
             throw new RuntimeException("Wash not found");
         }
