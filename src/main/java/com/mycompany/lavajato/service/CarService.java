@@ -76,6 +76,33 @@ public class CarService {
                 .collect(Collectors.toList());
     }
 
+    public CarResponse updateCar(UUID id, CarRequest carRequest){
+        Optional<Car> carOptional = carRepository.findById(id);
+        
+        if(carOptional.isPresent()) {
+            Car car = carOptional.get();
+
+            car.setLicensePlate(carRequest.licensePlate());
+            car.setModel(carRequest.model());
+            car.setColor(carRequest.color());
+            car.setStatus(carRequest.status());
+
+            if(carRequest.ownerId() != null) {
+                Optional<Owner> ownerOptional = ownerRepository.findById(carRequest.ownerId());
+                ownerOptional.ifPresent(car::setOwner);
+            } else {
+                car.setOwner(null);
+            }
+
+            Car updatedCar = carRepository.save(car);
+            UUID ownerId = updatedCar.getOwner() != null ? updatedCar.getOwner().getId() : null;
+
+            return new CarResponse(updatedCar.getId(), updatedCar.getLicensePlate(), updatedCar.getModel(), updatedCar.getColor(), updatedCar.getStatus(), ownerId);
+        } else {
+            throw new RuntimeException("Car not found");
+        }
+    }
+
     public CarResponse updateCarStatus(UUID id, UpdateCarStatusRequest updateCarStatusRequest) {
         Optional<Car> carOptional = carRepository.findById(id);
 
