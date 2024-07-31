@@ -1,0 +1,6 @@
+CREATE TABLE employees(
+    id UUID DEFAULT RANDOM_UUID() PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    role VARCHAR(255) NOT NULL,
+    commission DOUBLE NOT NULL
+);

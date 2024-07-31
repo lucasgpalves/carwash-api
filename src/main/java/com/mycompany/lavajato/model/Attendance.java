@@ -33,7 +33,7 @@ public class Attendance {
     private Employee employee;
 
     @Column(nullable = false)
-    private LocalDateTime startAt;
+    private LocalDateTime startsAt;
 
     @Column(nullable = false)
     private LocalDateTime endsAt;
