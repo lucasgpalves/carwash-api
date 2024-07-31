@@ -1,4 +1,4 @@
-package com.mycompany.lavajato.response;
+package com.mycompany.carwash.response;
 
 import java.util.UUID;
 

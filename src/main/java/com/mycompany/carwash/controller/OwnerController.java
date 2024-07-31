@@ -1,4 +1,4 @@
-package com.mycompany.lavajato.controller;
+package com.mycompany.carwash.controller;
 
 import java.util.List;
 import java.util.UUID;
@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.mycompany.lavajato.request.OwnerRequest;
-import com.mycompany.lavajato.response.OwnerResponse;
-import com.mycompany.lavajato.service.OwnerService;
+import com.mycompany.carwash.request.OwnerRequest;
+import com.mycompany.carwash.response.OwnerResponse;
+import com.mycompany.carwash.service.OwnerService;
 
 @RestController
 @RequestMapping("/api/owners")

@@ -1,4 +1,4 @@
-package com.mycompany.lavajato.service;
+package com.mycompany.carwash.service;
 
 import java.util.List;
 import java.util.Optional;
@@ -8,12 +8,12 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.mycompany.lavajato.model.Car;
-import com.mycompany.lavajato.model.Wash;
-import com.mycompany.lavajato.repository.CarRepository;
-import com.mycompany.lavajato.repository.WashRepository;
-import com.mycompany.lavajato.request.WashRequest;
-import com.mycompany.lavajato.response.WashResponse;
+import com.mycompany.carwash.model.Car;
+import com.mycompany.carwash.model.Wash;
+import com.mycompany.carwash.repository.CarRepository;
+import com.mycompany.carwash.repository.WashRepository;
+import com.mycompany.carwash.request.WashRequest;
+import com.mycompany.carwash.response.WashResponse;
 
 @Service
 public class WashService {

@@ -1,6 +1,6 @@
-package com.mycompany.lavajato.request;
+package com.mycompany.carwash.request;
 
-import com.mycompany.lavajato.model.CarStatus;
+import com.mycompany.carwash.model.CarStatus;
 
 public record UpdateCarStatusRequest(CarStatus status) {
     

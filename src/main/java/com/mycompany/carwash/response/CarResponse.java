@@ -1,8 +1,8 @@
-package com.mycompany.lavajato.response;
+package com.mycompany.carwash.response;
 
 import java.util.UUID;
 
-import com.mycompany.lavajato.model.CarStatus;
+import com.mycompany.carwash.model.CarStatus;
 
 public record CarResponse(UUID id, 
     String licensePlate, 

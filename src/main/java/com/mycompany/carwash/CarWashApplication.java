@@ -1,13 +1,13 @@
-package com.mycompany.lavajato;
+package com.mycompany.carwash;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class LavajatoApplication {
+public class CarWashApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(LavajatoApplication.class, args);
+		SpringApplication.run(CarWashApplication.class, args);
 	}
 
 }

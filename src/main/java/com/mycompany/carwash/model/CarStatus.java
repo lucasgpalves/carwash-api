@@ -1,4 +1,4 @@
-package com.mycompany.lavajato.model;
+package com.mycompany.carwash.model;
 
 public enum CarStatus {
     A_FAZER,

@@ -1,4 +1,4 @@
-package com.mycompany.lavajato.model;
+package com.mycompany.carwash.model;
 
 import java.util.UUID;
 

@@ -1,10 +1,10 @@
-package com.mycompany.lavajato.repository;
+package com.mycompany.carwash.repository;
 
 import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.mycompany.lavajato.model.Owner;
+import com.mycompany.carwash.model.Owner;
 
 public interface OwnerRepository extends JpaRepository<Owner, UUID>{
     
