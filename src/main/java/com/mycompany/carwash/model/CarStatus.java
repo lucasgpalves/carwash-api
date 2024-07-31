@@ -1,8 +1,8 @@
 package com.mycompany.carwash.model;
 
 public enum CarStatus {
-    A_FAZER,
-    LAVANDO,
-    SECANDO,
-    PRONTO
+    TO_DO,
+    WASHING,
+    DRYING,
+    DONE
 }

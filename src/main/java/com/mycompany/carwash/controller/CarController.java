@@ -45,6 +45,12 @@ public class CarController {
         return ResponseEntity.ok(car);
     }
 
+    @GetMapping("/status/{status}")
+    public ResponseEntity<List<CarResponse>> getCarsByStatus(@PathVariable CarStatus status) {
+        List<CarResponse> cars = carService.getCarsByStatus(status);
+        return ResponseEntity.ok(cars);
+    }
+
     @PutMapping("{id}")
     public ResponseEntity<CarResponse> updateCar(@PathVariable UUID id, @RequestBody CarRequest carRequest) {
         CarResponse updatedCar = carService.updateCar(id, carRequest);
@@ -55,12 +61,6 @@ public class CarController {
     public ResponseEntity<CarResponse> updateCarStatus(@PathVariable UUID id, @RequestBody UpdateCarStatusRequest updateCarStatusRequest) {
         CarResponse updatedCar = carService.updateCarStatus(id, updateCarStatusRequest);
         return ResponseEntity.ok(updatedCar);
-    }
-
-    @GetMapping("/status/{status}")
-    public ResponseEntity<List<CarResponse>> getCarsByStatus(@PathVariable CarStatus status) {
-        List<CarResponse> cars = carService.getCarsByStatus(status);
-        return ResponseEntity.ok(cars);
     }
 
     @DeleteMapping("/{id}")

@@ -114,6 +114,8 @@ public class CarService {
             Car updatedCar = carRepository.save(car);
             UUID ownerId = car.getOwner() != null ? car.getOwner().getId() : null;
 
+            System.out.println(updatedCar.getColor());
+
             return new CarResponse(updatedCar.getId(), updatedCar.getLicensePlate(), updatedCar.getModel(), updatedCar.getColor(), updatedCar.getStatus(), ownerId);
         } else {
             throw new RuntimeException("Car not found");
