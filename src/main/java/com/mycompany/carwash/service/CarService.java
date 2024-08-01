@@ -6,8 +6,10 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
+import com.mycompany.carwash.events.CarStatusChangedEvent;
 import com.mycompany.carwash.model.Car;
 import com.mycompany.carwash.model.CarStatus;
 import com.mycompany.carwash.model.Owner;
@@ -25,6 +27,9 @@ public class CarService {
 
     @Autowired
     private OwnerRepository ownerRepository;
+
+    @Autowired
+    private ApplicationEventPublisher eventPublisher;
 
     public CarResponse createCar(CarRequest carRequest){
         Car car = new Car();
@@ -114,7 +119,9 @@ public class CarService {
             Car updatedCar = carRepository.save(car);
             UUID ownerId = car.getOwner() != null ? car.getOwner().getId() : null;
 
-            System.out.println(updatedCar.getColor());
+            if (car.getStatus() == CarStatus.DONE) {
+                eventPublisher.publishEvent(new CarStatusChangedEvent(car.getId(), CarStatus.DONE));
+            }
 
             return new CarResponse(updatedCar.getId(), updatedCar.getLicensePlate(), updatedCar.getModel(), updatedCar.getColor(), updatedCar.getStatus(), ownerId);
         } else {

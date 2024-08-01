@@ -86,4 +86,15 @@ public class WashService {
             throw new RuntimeException("Wash not found");
         }
     }
+
+    public WashResponse finalizeWash(UUID id) {
+        Wash wash = washRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Wash not found"));
+
+        wash.setEndsAt(LocalDateTime.now());
+        Wash savedWash = washRepository.save(wash);
+
+        UUID carId = wash.getCar().getId();
+        return new WashResponse(savedWash.getId(), savedWash.getDescription(), savedWash.getAmount(), savedWash.isPaid(), carId, savedWash.getStartsAt(), savedWash.getEndsAt());
+    }
 }
