@@ -4,8 +4,6 @@ CREATE TABLE attendances(
     starts_at TIMESTAMP NOT NULL,
     ends_at TIMESTAMP NOT NULL,
     is_present BOOLEAN NOT NULL,
-    CONSTRAINT fk_employee
-        FOREIGN KEY(employee_id)
-        REFERENCES employees(id)
+    FOREIGN KEY(employee_id) REFERENCES employees(id)
 
 );

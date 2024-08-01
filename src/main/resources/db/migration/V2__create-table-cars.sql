@@ -5,5 +5,5 @@ CREATE TABLE cars(
     color VARCHAR(20) NOT NULL,
     status VARCHAR(20),
     owner_id UUID,
-    CONSTRAINT fk_owner FOREIGN KEY (owner_id) REFERENCES owners(id) ON DELETE CASCADE
+    FOREIGN KEY (owner_id) REFERENCES owners(id) ON DELETE CASCADE
 );

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mycompany.carwash.request.WashCreateRequest;
 import com.mycompany.carwash.request.WashRequest;
 import com.mycompany.carwash.response.WashResponse;
 import com.mycompany.carwash.service.WashService;
@@ -26,8 +27,8 @@ public class WashController {
     private WashService washService;
 
     @PostMapping
-    public ResponseEntity<WashResponse> createWash(@RequestBody WashRequest washRequest){
-        WashResponse savedWash = washService.createWash(washRequest);
+    public ResponseEntity<WashResponse> createWash(@RequestBody WashCreateRequest washCreateRequest){
+        WashResponse savedWash = washService.createWash(washCreateRequest);
         return ResponseEntity.ok(savedWash);
     }
 

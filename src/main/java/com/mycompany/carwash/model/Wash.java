@@ -1,5 +1,6 @@
 package com.mycompany.carwash.model;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 import jakarta.persistence.Column;
@@ -39,4 +40,10 @@ public class Wash {
 
     @Column(nullable = false)
     private boolean isPaid;
+
+    @Column(name = "starts_at" ,nullable = false)
+    private LocalDateTime startsAt;
+
+    @Column(name = "ends_at")
+    private LocalDateTime endsAt;
 }
