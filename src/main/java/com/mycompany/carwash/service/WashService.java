@@ -88,13 +88,15 @@ public class WashService {
     }
 
     public WashResponse finalizeWash(UUID id) {
-        Wash wash = washRepository.findById(id)
+        Wash wash = washRepository.findByCarIdAndEndsAtIsNull(id)
             .orElseThrow(() -> new RuntimeException("Wash not found"));
 
         wash.setEndsAt(LocalDateTime.now());
         Wash savedWash = washRepository.save(wash);
 
         UUID carId = wash.getCar().getId();
+        // System.out.println("Wash finished");
+
         return new WashResponse(savedWash.getId(), savedWash.getDescription(), savedWash.getAmount(), savedWash.isPaid(), carId, savedWash.getStartsAt(), savedWash.getEndsAt());
     }
 }
