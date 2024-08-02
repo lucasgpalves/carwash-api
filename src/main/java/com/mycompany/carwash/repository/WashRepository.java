@@ -10,7 +10,7 @@ import com.mycompany.carwash.model.Wash;
 import com.mycompany.carwash.model.WashStatus;
 
 public interface WashRepository extends JpaRepository<Wash, UUID>{
-    Optional<Wash> findByCarIdAndEndsAtIsNull(UUID carId);
+    Optional<Wash> findByIdAndEndsAtIsNull(UUID id);
 
     List<Wash> findByStatus(WashStatus status);
 }

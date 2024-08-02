@@ -46,8 +46,8 @@ public class WashController {
     }
 
     @GetMapping("/status/{status}")
-    public ResponseEntity<List<WashResponse>> getWashByStatus(@PathVariable WashStatus washStatus) {
-        List<WashResponse> washes = washService.getWashByStatus(washStatus);
+    public ResponseEntity<List<WashResponse>> getWashByStatus(@PathVariable WashStatus status) {
+        List<WashResponse> washes = washService.getWashByStatus(status);
         return ResponseEntity.ok(washes);
     }
 

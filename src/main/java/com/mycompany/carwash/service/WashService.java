@@ -98,7 +98,7 @@ public class WashService {
         }
     }
 
-        public WashResponse updateWashStatus(UUID id, UpdateWashStatusRequest updateWashStatusRequest) {
+    public WashResponse updateWashStatus(UUID id, UpdateWashStatusRequest updateWashStatusRequest) {
         Wash wash = washRepository.findById(id)
             .orElseThrow(() -> new RuntimeException("Wash not found"));
 
@@ -109,6 +109,10 @@ public class WashService {
             //Save car
             wash.setStatus(newStatus);
             Wash updatedWash = washRepository.save(wash);
+
+            if(newStatus == WashStatus.DONE) {
+                finalizeWash(id);
+            }
 
             //Get ownerId
             UUID carId = wash.getCar().getId();
@@ -127,9 +131,9 @@ public class WashService {
         }
     }
 
-    public void finalizeWash(UUID carId) {
-        Wash wash = washRepository.findByCarIdAndEndsAtIsNull(carId)
-            .orElseThrow(() -> new RuntimeException("Wash not found for this car"));
+    public void finalizeWash(UUID id) {
+        Wash wash = washRepository.findByIdAndEndsAtIsNull(id)
+            .orElseThrow(() -> new RuntimeException("Wash not found"));
 
         validateDoneNotPaidStatus(wash);
 
@@ -138,22 +142,24 @@ public class WashService {
     }
 
     private void validateDoneNotPaidStatus(Wash wash) {
-        if(wash.isPaid()) {
+        // Verifica o status de pagamento
+        if (wash.isPaid()) {
             if (wash.getStatus() == WashStatus.DONE) {
                 wash.setStatus(WashStatus.READY);
-                washRepository.save(wash);
             } else {
-                throw new RuntimeException("Car status must be DONE to transition to READY");
+                throw new RuntimeException("Wash status must be DONE to transition to READY");
             }
         } else {
             if (wash.getStatus() == WashStatus.DONE) {
                 wash.setStatus(WashStatus.DONE_NOT_PAID);
-                washRepository.save(wash);
             } else {
-                throw new RuntimeException("Car status must be DONE to transition to DONE_NOT_PAID"); 
+                throw new RuntimeException("Wash status must be DONE to transition to DONE_NOT_PAID"); 
             }
         }
+        // Salva a lavagem com o novo status
+        washRepository.save(wash);
     }
+    
 
     private boolean isValidStatusTransaction(WashStatus currentStatus, WashStatus newStatus) {
         switch (currentStatus) {
