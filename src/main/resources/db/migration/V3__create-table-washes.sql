@@ -4,6 +4,7 @@ CREATE TABLE washes (
     description VARCHAR(255) NOT NULL,
     amount DOUBLE NOT NULL,
     is_paid BOOLEAN NOT NULL,
+    status VARCHAR(20),
     starts_at TIMESTAMP NOT NULL,
     ends_at TIMESTAMP,
     FOREIGN KEY (car_id) REFERENCES cars(id)
