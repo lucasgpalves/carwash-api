@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.mycompany.carwash.model.WashStatus;
+import com.mycompany.carwash.request.UpdateWashStatusRequest;
 import com.mycompany.carwash.request.WashRequest;
 import com.mycompany.carwash.response.WashResponse;
 import com.mycompany.carwash.service.WashService;
@@ -42,9 +45,21 @@ public class WashController {
         return ResponseEntity.ok(wash);
     }
 
+    @GetMapping("/status/{status}")
+    public ResponseEntity<List<WashResponse>> getWashByStatus(@PathVariable WashStatus washStatus) {
+        List<WashResponse> washes = washService.getWashByStatus(washStatus);
+        return ResponseEntity.ok(washes);
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<WashResponse> updateWashById(@PathVariable UUID id, @RequestBody WashRequest washRequest) {
         WashResponse wash = washService.updateWashById(id, washRequest);
+        return ResponseEntity.ok(wash);
+    }
+
+    @PutMapping("/{id}/status")
+    public ResponseEntity<WashResponse> putMethodName(@PathVariable UUID id, @RequestBody UpdateWashStatusRequest updateWashStatusRequest) {
+        WashResponse wash = washService.updateWashStatus(id, updateWashStatusRequest);
         return ResponseEntity.ok(wash);
     }
 

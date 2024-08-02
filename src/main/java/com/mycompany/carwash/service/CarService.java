@@ -6,17 +6,13 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
-import com.mycompany.carwash.events.CarStatusChangedEvent;
 import com.mycompany.carwash.model.Car;
-import com.mycompany.carwash.model.CarStatus;
 import com.mycompany.carwash.model.Owner;
 import com.mycompany.carwash.repository.CarRepository;
 import com.mycompany.carwash.repository.OwnerRepository;
 import com.mycompany.carwash.request.CarRequest;
-import com.mycompany.carwash.request.UpdateCarStatusRequest;
 import com.mycompany.carwash.response.CarResponse;
 
 @Service
@@ -28,16 +24,12 @@ public class CarService {
     @Autowired
     private OwnerRepository ownerRepository;
 
-    @Autowired
-    private ApplicationEventPublisher eventPublisher;
-
     public CarResponse createCar(CarRequest carRequest){
         Car car = new Car();
 
         car.setLicensePlate(carRequest.licensePlate());
         car.setModel(carRequest.model());
         car.setColor(carRequest.color());
-        car.setStatus(carRequest.status());
 
         if(carRequest.ownerId() != null) {
             Optional<Owner> ownerOptional = ownerRepository.findById(carRequest.ownerId());
@@ -46,7 +38,7 @@ public class CarService {
 
         Car savedCar = carRepository.save(car);
         UUID ownerId = car.getOwner() != null ? car.getOwner().getId() : null;
-        return new CarResponse(savedCar.getId(), savedCar.getLicensePlate(), savedCar.getModel(), savedCar.getColor(), savedCar.getStatus(), ownerId);
+        return new CarResponse(savedCar.getId(), savedCar.getLicensePlate(), savedCar.getModel(), savedCar.getColor(), ownerId);
     }
 
     public List<CarResponse> getAllCars() {
@@ -56,7 +48,6 @@ public class CarService {
                 car.getLicensePlate(),
                 car.getModel(),
                 car.getColor(),
-                car.getStatus(),
                 car.getOwner() != null ? car.getOwner().getId() : null))
             .collect(Collectors.toList());
     }
@@ -67,18 +58,7 @@ public class CarService {
 
         UUID ownerId = car.getOwner() != null ? car.getOwner().getId() : null;
 
-        return new CarResponse(car.getId(), car.getLicensePlate(), car.getModel(), car.getColor(), car.getStatus(), ownerId);
-    }
-
-    public List<CarResponse> getCarsByStatus(CarStatus status) {
-        return carRepository.findByStatus(status).stream()
-                .map(car -> new CarResponse(car.getId(), 
-                    car.getLicensePlate(), 
-                    car.getModel(), 
-                    car.getColor(), 
-                    car.getStatus(), 
-                    car.getOwner() != null ? car.getOwner().getId() : null))
-                .collect(Collectors.toList());
+        return new CarResponse(car.getId(), car.getLicensePlate(), car.getModel(), car.getColor(), ownerId);
     }
 
     public CarResponse updateCar(UUID id, CarRequest carRequest){
@@ -90,7 +70,6 @@ public class CarService {
             car.setLicensePlate(carRequest.licensePlate());
             car.setModel(carRequest.model());
             car.setColor(carRequest.color());
-            car.setStatus(carRequest.status());
 
             if(carRequest.ownerId() != null) {
                 Optional<Owner> ownerOptional = ownerRepository.findById(carRequest.ownerId());
@@ -102,28 +81,7 @@ public class CarService {
             Car updatedCar = carRepository.save(car);
             UUID ownerId = updatedCar.getOwner() != null ? updatedCar.getOwner().getId() : null;
 
-            return new CarResponse(updatedCar.getId(), updatedCar.getLicensePlate(), updatedCar.getModel(), updatedCar.getColor(), updatedCar.getStatus(), ownerId);
-        } else {
-            throw new RuntimeException("Car not found");
-        }
-    }
-
-    public CarResponse updateCarStatus(UUID id, UpdateCarStatusRequest updateCarStatusRequest) {
-        Optional<Car> carOptional = carRepository.findById(id);
-
-        if(carOptional.isPresent()) {
-            Car car = carOptional.get();
-
-            car.setStatus(updateCarStatusRequest.status());
-
-            Car updatedCar = carRepository.save(car);
-            UUID ownerId = car.getOwner() != null ? car.getOwner().getId() : null;
-
-            if (car.getStatus() == CarStatus.DONE) {
-                eventPublisher.publishEvent(new CarStatusChangedEvent(car.getId(), CarStatus.DONE));
-            }
-
-            return new CarResponse(updatedCar.getId(), updatedCar.getLicensePlate(), updatedCar.getModel(), updatedCar.getColor(), updatedCar.getStatus(), ownerId);
+            return new CarResponse(updatedCar.getId(), updatedCar.getLicensePlate(), updatedCar.getModel(), updatedCar.getColor(), ownerId);
         } else {
             throw new RuntimeException("Car not found");
         }
@@ -137,4 +95,5 @@ public class CarService {
         }
 
     }
+
 }

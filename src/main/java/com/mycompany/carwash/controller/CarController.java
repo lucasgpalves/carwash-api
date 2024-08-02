@@ -14,9 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.mycompany.carwash.model.CarStatus;
 import com.mycompany.carwash.request.CarRequest;
-import com.mycompany.carwash.request.UpdateCarStatusRequest;
 import com.mycompany.carwash.response.CarResponse;
 import com.mycompany.carwash.service.CarService;
 
@@ -45,21 +43,9 @@ public class CarController {
         return ResponseEntity.ok(car);
     }
 
-    @GetMapping("/status/{status}")
-    public ResponseEntity<List<CarResponse>> getCarsByStatus(@PathVariable CarStatus status) {
-        List<CarResponse> cars = carService.getCarsByStatus(status);
-        return ResponseEntity.ok(cars);
-    }
-
     @PutMapping("{id}")
     public ResponseEntity<CarResponse> updateCar(@PathVariable UUID id, @RequestBody CarRequest carRequest) {
         CarResponse updatedCar = carService.updateCar(id, carRequest);
-        return ResponseEntity.ok(updatedCar);
-    }
-
-    @PutMapping("{id}/status")
-    public ResponseEntity<CarResponse> updateCarStatus(@PathVariable UUID id, @RequestBody UpdateCarStatusRequest updateCarStatusRequest) {
-        CarResponse updatedCar = carService.updateCarStatus(id, updateCarStatusRequest);
         return ResponseEntity.ok(updatedCar);
     }
 

@@ -4,8 +4,6 @@ import java.util.UUID;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -37,9 +35,6 @@ public class Car {
 
     @Column(nullable = false)
     private String color;
-
-    @Enumerated(EnumType.STRING)
-    private CarStatus status;
 
     @ManyToOne
     @JoinColumn(name = "owner_id", nullable = true)
