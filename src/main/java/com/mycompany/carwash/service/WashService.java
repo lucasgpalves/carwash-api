@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
+import com.mycompany.carwash.events.WashStatusChangeEvent;
 import com.mycompany.carwash.model.Car;
 import com.mycompany.carwash.model.WashStatus;
 import com.mycompany.carwash.model.Wash;
@@ -114,10 +115,7 @@ public class WashService {
             wash.setStatus(newStatus);
             Wash updatedWash = washRepository.save(wash);
 
-            eventPublisher
-            if(newStatus == WashStatus.DONE) {
-                finalizeWash(id);
-            }
+            eventPublisher.publishEvent(new  WashStatusChangeEvent(this, id, newStatus));
 
             //Get ownerId
             UUID carId = wash.getCar().getId();
