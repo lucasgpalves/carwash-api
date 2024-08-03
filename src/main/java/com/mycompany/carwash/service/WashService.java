@@ -7,6 +7,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
 import com.mycompany.carwash.model.Car;
@@ -26,6 +27,9 @@ public class WashService {
 
     @Autowired
     private CarRepository carRepository;
+
+    @Autowired
+    private ApplicationEventPublisher eventPublisher;
 
     public WashResponse createWash(WashRequest washRequest) {
         Car car = carRepository.findById(washRequest.carId()).orElseThrow(() -> new RuntimeException("Car not found"));
@@ -110,6 +114,7 @@ public class WashService {
             wash.setStatus(newStatus);
             Wash updatedWash = washRepository.save(wash);
 
+            eventPublisher
             if(newStatus == WashStatus.DONE) {
                 finalizeWash(id);
             }
