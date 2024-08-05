@@ -4,13 +4,17 @@ Este é um sistema de gerenciamento para um lava jato, desenvolvido em Spring Bo
 
 ## Funcionalidades
 
-- **Gerenciamento de Carros:**
+- **Gerenciamento de Lavagens:**
   - Adicionar carros.
-  - Atualizar o status dos carros (Esperando, Lavando, Secando, Pronto).
-  - Listar carros por status.
+  - Atualizar o status das lavagens (Esperando, Lavando, Secando, Pronto).
+  - Listar lavagens por status.
 
-- **Outros:**
-  - Gerar o faturamento do dia.
+- **Entidades:**
+  - Dono
+  - Carro
+  - Lavagem
+  - Funcionário
+  - Presença
 
 ## Estrutura do Projeto
 
@@ -19,33 +23,16 @@ src
 └── main
     ├── java
     │   └── com
-    │       └── lavajato
-    │           ├── controller
-    │           │   ├── CarController.java
-    │           │   ├── OwnerController.java    
-    │           │   └── WashController.java
-    │           ├── model
-    │           │   ├── Car.java
-    │           │   ├── CarStatus.java
-    │           │   ├── Owner.java
-    │           │   └── Wash.java
-    │           ├── repository
-    │           │   ├── CarRepository.java
-    │           │   ├── OwnerRepository.java
-    │           │   └── WashRepository.java
-    │           ├── request
-    │           │   ├── CarRequest.java
-    │           │   ├── OwnerRequest.java
-    │           │   └── WashRequest.java
-    │           ├── response
-    │           │   ├── CarResponse.java
-    │           │   ├── OwnerResponse.java
-    │           │   └── WashResponse.java
-    │           ├── service
-    │           │   ├── CarService.java
-    │           │   ├── OwnerService.java
-    │           │   └── WashService.java
-    │           └── LavajatoApplication.java
+    │       └── carwash
+    │           ├── \controller 
+    │           ├── \events
+    │           ├── \listeners
+    │           ├── \model
+    │           ├── \repository
+    │           ├── \request
+    │           ├── \response
+    │           ├── \service
+    │           └── CarWashApplication.java
     └── resources
         ├── db
         │    └── migration
@@ -117,7 +104,6 @@ Body para adicionar um novo Carro
   "licensePlate": "AAA1A11",
   "model": "Toyota Corolla",
   "color": "Preto",
-  "status": "A_FAZER",
 	"ownerId": null
 }
 ```
@@ -138,6 +124,7 @@ Body para adicionar uma Nova Lavangem
   "carId": "Insira o Id do carro criado aqui",
   "description": "Americana + Cera",
   "amount": 70.00,
+  "status": "PENDING",
   "isPaid": false
 }
 ```

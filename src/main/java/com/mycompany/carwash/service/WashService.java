@@ -115,7 +115,7 @@ public class WashService {
             wash.setStatus(newStatus);
             Wash updatedWash = washRepository.save(wash);
 
-            eventPublisher.publishEvent(new  WashStatusChangeEvent(this, id, newStatus));
+            eventPublisher.publishEvent(new WashStatusChangeEvent(this, id, newStatus));
 
             //Get ownerId
             UUID carId = wash.getCar().getId();
