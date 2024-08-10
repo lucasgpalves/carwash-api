@@ -1,6 +1,12 @@
 # Sistema de Gerenciamento de Lava Jato
 
-Este é um sistema de gerenciamento para um lava jato, desenvolvido em Spring Boot com H2 Database(para testes). O sistema permite gerenciar a lavagens diárias, um sistema de Kanban para os carros (Esperando, Lavando, Secando, Pronto), gerar o faturamento do dia e calcular os ganhos dos funcionários com base em uma porcentagem diferente para cada um.
+Este é um sistema de gerenciamento para um lava jato, desenvolvido em Spring Boot com H2 Database(para testes). O sistema permite gerenciar a lavagens diárias, um sistema de Kanban para os carros (Esperando, Lavando, Secando, etc), gerar o faturamento do dia e calcular os ganhos dos funcionários com base em uma porcentagem diferente para cada um.
+
+## Tecnologias
+- Java
+- Spring Boot
+- JPA
+- H2 Database
 
 ## Funcionalidades
 
@@ -13,8 +19,6 @@ Este é um sistema de gerenciamento para um lava jato, desenvolvido em Spring Bo
   - Dono
   - Carro
   - Lavagem
-  - Funcionário
-  - Presença
 
 ## Estrutura do Projeto
 
