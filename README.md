@@ -7,6 +7,7 @@ Este é um sistema de gerenciamento para um lava jato, desenvolvido em Spring Bo
 - Spring Boot
 - JPA
 - H2 Database
+- Swagger
 
 ## Funcionalidades
 
@@ -47,6 +48,41 @@ src
 
 - Java 11 ou superior
 - Maven 3.6.0 ou superior
+
+## Documentação da API
+
+Este projeto utiliza o Springdoc OpenAPI para gerar a documentação dos endpoints da API.
+
+### Documentação Programática
+
+A documentação da API está disponível nos seguintes formatos, sem a interface gráfica do Swagger UI:
+
+- **OpenAPI JSON**: [http://localhost:8080/v3/api-docs](http://localhost:8080/v3/api-docs)
+- **OpenAPI YAML**: [http://localhost:8080/v3/api-docs.yaml](http://localhost:8080/v3/api-docs.yaml)
+
+Esses endpoints geram automaticamente a especificação OpenAPI, que pode ser utilizada para gerar clientes da API, integração com ferramentas de teste, ou qualquer outra ferramenta que suporte OpenAPI.
+
+### Configuração
+
+A configuração do Springdoc é realizada através da classe `OpenApiConfiguration`, localizada em `src/main/java/com/mycompany/carwash/config/OpenApiConfiguration.java`. Nessa classe, são definidos os detalhes da API, como título, versão e descrição:
+
+```java
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.info.Info;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+@OpenAPIDefinition(
+    info = @Info(
+        title = "Carwash API",
+        version = "v1",
+        description = "Documentação da API do sistema de gerenciamento de lava jato"
+    )
+)
+public class OpenApiConfiguration {
+    // Configurações adicionais podem ser adicionadas aqui
+}
+```
 
 ## Configuração do Banco de Dados
 

@@ -1,0 +1,11 @@
+spring:
+    application:
+        name: carwash
+
+    datasource:
+        url: jdbc:h2:mem:carwash
+        driver-class-name: org.h2.Driver
+        password:
+        username: sa
+    jpa:
+        database-platform: org.hibernate.dialect.H2Dialect
