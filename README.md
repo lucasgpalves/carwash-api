@@ -2,6 +2,23 @@
 
 Este é um sistema de gerenciamento para um lava jato, desenvolvido em Spring Boot com H2 Database(para testes). O sistema permite gerenciar a lavagens diárias, um sistema de Kanban para os carros (Esperando, Lavando, Secando, etc), gerar o faturamento do dia e calcular os ganhos dos funcionários com base em uma porcentagem diferente para cada um.
 
+## Sumário
+1. [Tecnologias](#tecnologias)
+2. [Funcionalidades](#funcionalidades)
+3. [Estrutura do Projeto](#estrutura-do-projeto)
+4. [Requisitos](#requisitos)
+5. [Documentação da API](#documentação-da-api)
+   - [Documentação Programática](#documentação-programática)
+   - [Configuração](#configuração)
+6. [Configuração do Banco de Dados](#configuração-do-banco-de-dados)
+7. [Compilação e Execução](#compilação-e-execução)
+8. [Endpoints da API](#endpoints-da-api)
+   - [Dono](#dono)
+   - [Carros](#carros)
+   - [Lavagens](#lavagens)
+9. [Contribuição](#contribuição)
+10. [Licença](#licença)
+
 ## Tecnologias
 - Java
 - Spring Boot
