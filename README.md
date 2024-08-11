@@ -2,11 +2,29 @@
 
 Este é um sistema de gerenciamento para um lava jato, desenvolvido em Spring Boot com H2 Database(para testes). O sistema permite gerenciar a lavagens diárias, um sistema de Kanban para os carros (Esperando, Lavando, Secando, etc), gerar o faturamento do dia e calcular os ganhos dos funcionários com base em uma porcentagem diferente para cada um.
 
+## Sumário
+1. [Tecnologias](#tecnologias)
+2. [Funcionalidades](#funcionalidades)
+3. [Estrutura do Projeto](#estrutura-do-projeto)
+4. [Requisitos](#requisitos)
+5. [Documentação da API](#documentação-da-api)
+   - [Documentação Programática](#documentação-programática)
+   - [Configuração](#configuração)
+6. [Configuração do Banco de Dados](#configuração-do-banco-de-dados)
+7. [Compilação e Execução](#compilação-e-execução)
+8. [Endpoints da API](#endpoints-da-api)
+   - [Dono](#dono)
+   - [Carros](#carros)
+   - [Lavagens](#lavagens)
+9. [Contribuição](#contribuição)
+10. [Licença](#licença)
+
 ## Tecnologias
 - Java
 - Spring Boot
 - JPA
 - H2 Database
+- Swagger
 
 ## Funcionalidades
 
@@ -47,6 +65,41 @@ src
 
 - Java 11 ou superior
 - Maven 3.6.0 ou superior
+
+## Documentação da API
+
+Este projeto utiliza o Springdoc OpenAPI para gerar a documentação dos endpoints da API.
+
+### Documentação Programática
+
+A documentação da API está disponível nos seguintes formatos, sem a interface gráfica do Swagger UI:
+
+- **OpenAPI JSON**: [http://localhost:8080/v3/api-docs](http://localhost:8080/v3/api-docs)
+- **OpenAPI YAML**: [http://localhost:8080/v3/api-docs.yaml](http://localhost:8080/v3/api-docs.yaml)
+
+Esses endpoints geram automaticamente a especificação OpenAPI, que pode ser utilizada para gerar clientes da API, integração com ferramentas de teste, ou qualquer outra ferramenta que suporte OpenAPI.
+
+### Configuração
+
+A configuração do Springdoc é realizada através da classe `OpenApiConfiguration`, localizada em `src/main/java/com/mycompany/carwash/config/OpenApiConfiguration.java`. Nessa classe, são definidos os detalhes da API, como título, versão e descrição:
+
+```java
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.info.Info;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+@OpenAPIDefinition(
+    info = @Info(
+        title = "Carwash API",
+        version = "v1",
+        description = "Documentação da API do sistema de gerenciamento de lava jato"
+    )
+)
+public class OpenApiConfiguration {
+    // Configurações adicionais podem ser adicionadas aqui
+}
+```
 
 ## Configuração do Banco de Dados
 
